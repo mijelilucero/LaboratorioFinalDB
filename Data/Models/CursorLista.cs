@@ -10,5 +10,6 @@ namespace LaboratorioFinalDB.Data.Models
     {
         public int actual = 0;
         public int totalRegistros = 0;
+
     }
 }

@@ -17,7 +17,6 @@ namespace LaboratorioFinalDB
     {
 
         ConexionConsolasDB conexionCatalogoConsolas = new ConexionConsolasDB();
-        Consola cons = new Consola();
         List<Consola> todos_losRegistros;
         CursorLista cursor1 = new CursorLista();
 
@@ -50,59 +49,193 @@ namespace LaboratorioFinalDB
                 MessageBox.Show("Algo fallo al intentar hacer la conexion con la base de datos.");
             }
 
-
             comboBoxCompania.Items.AddRange(companiasConsolas);
         }
 
         private void buttonCrear_Click(object sender, EventArgs e)
         {
-            conexionCatalogoConsolas.CrearConsola(cons);
-        }
+            Consola consCrear = new Consola();
 
-        private void buttonCargarRegistros_Click(object sender, EventArgs e)
-        {
-            todos_losRegistros = conexionCatalogoConsolas.ObtenerRegistros();
-            if (todos_losRegistros.Count > 0)
+            consCrear.NombreConsola = textBoxNombre.Text;
+            consCrear.Compania = comboBoxCompania.Text;
+            consCrear.AnioLanzamiento = Int32.Parse(textBoxAnio_lanzamiento.Text);
+            consCrear.Generacion = Int32.Parse(textBoxGeneracion.Text);
+
+            if (conexionCatalogoConsolas.CrearConsola(consCrear))
             {
-                cursor1.totalRegistros = todos_losRegistros.Count;
-                cursor1.actual = 0;
-                MostrarRegistro();
+                MessageBox.Show("El registro fue creado exitosamente.");
+                dataGridViewConsolas.DataSource = conexionCatalogoConsolas.ObtenerTodosLosRegistros();
+                ActualizarTotalRegistros();
             }
             else
             {
-                MessageBox.Show("No hay registros");
+                MessageBox.Show("El registro no fue creado dentro de la base de datos.");
             }
         }
 
-        private void MostrarRegistro()
+
+        private void buttonCargarRegistros_Click(object sender, EventArgs e)
+        {
+            todos_losRegistros = conexionCatalogoConsolas.ObtenerTodosLosRegistros();
+            dataGridViewConsolas.DataSource = todos_losRegistros;
+
+            if (todos_losRegistros.Count > 0)
+            {
+                cursor1.totalRegistros = todos_losRegistros.Count;
+            }
+        }
+
+        private void buttonBuscarPorID_Click(object sender, EventArgs e)
+        {
+            int id_buscar = Int32.Parse(textBoxID.Text);
+            DataRow registro_encontrado = conexionCatalogoConsolas.BuscarRegistroporID(id_buscar);
+
+            if (registro_encontrado != null)
+            {
+                textBoxNombre.Text = registro_encontrado["nombre_consola"].ToString();
+                comboBoxCompania.Text = registro_encontrado["compania"].ToString();
+                textBoxAnio_lanzamiento.Text = registro_encontrado["anio_lanzamiento"].ToString();
+                textBoxGeneracion.Text = registro_encontrado["generacion"].ToString();
+            }
+            else
+            {
+                MessageBox.Show("No se encontro registro con este id.");
+            }
+
+            cursor1.actual = id_buscar - 1;
+        }
+
+
+        private void buttonActualizar_Click(object sender, EventArgs e)
+        {
+            Consola consActualizar = new Consola();
+            
+            consActualizar.Id = Convert.ToInt32(textBoxID.Text);
+            consActualizar.NombreConsola = textBoxNombre.Text;
+            consActualizar.Compania = comboBoxCompania.Text;
+            consActualizar.AnioLanzamiento = Int32.Parse(textBoxAnio_lanzamiento.Text);
+            consActualizar.Generacion = Int32.Parse(textBoxGeneracion.Text);
+
+            DialogResult resultado = MessageBox.Show("Estas seguro de que deseas actualizar este registro en la base de datos?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (resultado == DialogResult.Yes)
+            {
+                if (conexionCatalogoConsolas.Actualizar(consActualizar))
+                {
+                    MessageBox.Show("El registro fue actualizado exitosamente.");
+                    dataGridViewConsolas.DataSource = conexionCatalogoConsolas.ObtenerTodosLosRegistros();
+                    ActualizarTotalRegistros();
+                }
+                else
+                {
+                    MessageBox.Show("El registro no fue actualizado dentro de la base de datos.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Modificaciones no realizadas.");
+            }
+        }
+
+        private void buttonEliminar_Click(object sender, EventArgs e)
+        {
+            int id = Int32.Parse(textBoxID.Text);
+            
+            DialogResult resultado = MessageBox.Show("Estas seguro de que deseas eliminar permanentemente este registro en la base de datos?", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (resultado == DialogResult.Yes)
+            {
+                if (conexionCatalogoConsolas.Eliminar(id))
+                {
+                    MessageBox.Show("El registro fue eliminado exitosamente.");
+                    dataGridViewConsolas.DataSource = conexionCatalogoConsolas.ObtenerTodosLosRegistros();
+                    ActualizarTotalRegistros();
+                }
+                else
+                {
+                    MessageBox.Show("El registro no fue eliminado dentro de la base de datos.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Modificaciones no realizadas.");
+            }
+        }
+
+
+        //NAVEGACION DE REGISTROS
+        private void MostrarRegistroActual()
         {
             if (cursor1.actual >= 0 && cursor1.actual < cursor1.totalRegistros)
             {
                 Consola c = todos_losRegistros[cursor1.actual];
                 textBoxID.Text = c.Id.ToString();
-                textBoxNombre.Text = c.NombreConsola.ToString();
-                comboBoxCompania.Text = c.Compania.ToString();
+                textBoxNombre.Text = c.NombreConsola;
+                comboBoxCompania.Text = c.Compania;
                 textBoxAnio_lanzamiento.Text = c.AnioLanzamiento.ToString();
                 textBoxGeneracion.Text = c.Generacion.ToString();
-
-
-                //incrementar el cursor y validar que no se pase del total de registros
-                cursor1.actual++;
-                if (cursor1.actual >= cursor1.totalRegistros)
-                {
-                    cursor1.actual = 0;
-                    MessageBox.Show("Fin de los registros");
-                }
             }
         }
 
+        private void buttonSiguiente_Click(object sender, EventArgs e)
+        {
+          
+            if (cursor1.actual < cursor1.totalRegistros - 1) // Verificar antes de incrementar
+            {
+                cursor1.actual++;
+                MostrarRegistroActual();
+            }
+            else
+            {
+                MessageBox.Show("Fin de los registros.");
+            }
+        }
 
+        private void buttonAnterior_Click(object sender, EventArgs e)
+        {
+            if (cursor1.actual > 0) // Verificar antes de decrementar
+            {
+                cursor1.actual--;
+                MostrarRegistroActual();
+            }
+            else
+            {
+                MessageBox.Show("Fin de los registros.");
+            }
+        }
+        
+        public void ActualizarTotalRegistros()
+        {
+            todos_losRegistros = conexionCatalogoConsolas.ObtenerTodosLosRegistros();
 
+            if (todos_losRegistros.Count > 0)
+            {
+                cursor1.totalRegistros = todos_losRegistros.Count;
+            }
+        }
 
+        private void buttonFiltrar_porNintendo_Click(object sender, EventArgs e)
+        {
+            List<Consola> registrosNintendo;
 
+            registrosNintendo = conexionCatalogoConsolas.ObtenerRegistrosNintendo();
+            dataGridViewConsolas.DataSource = registrosNintendo;
+        }
 
+        private void buttonFiltrar_porSega_Click(object sender, EventArgs e)
+        {
+            List<Consola> registrosSega;
 
+            registrosSega = conexionCatalogoConsolas.ObtenerRegistrosSega();
+            dataGridViewConsolas.DataSource = registrosSega;
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            List<Consola> registrosSony;
 
+            registrosSony = conexionCatalogoConsolas.ObtenerRegistrosSony();
+            dataGridViewConsolas.DataSource = registrosSony;
+        }
     }
 }

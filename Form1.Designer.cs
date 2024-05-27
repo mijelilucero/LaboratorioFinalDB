@@ -41,9 +41,23 @@
             this.textBoxGeneracion = new System.Windows.Forms.TextBox();
             this.comboBoxCompania = new System.Windows.Forms.ComboBox();
             this.buttonCrear = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewConsolas = new System.Windows.Forms.DataGridView();
             this.buttonCargarRegistros = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.buttonBuscarPorID = new System.Windows.Forms.Button();
+            this.buttonActualizar = new System.Windows.Forms.Button();
+            this.buttonEliminar = new System.Windows.Forms.Button();
+            this.buttonSiguiente = new System.Windows.Forms.Button();
+            this.buttonAnterior = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonFiltrar_porNintendo = new System.Windows.Forms.Button();
+            this.buttonFiltrar_porSega = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConsolas)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -52,7 +66,7 @@
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.label1.Font = new System.Drawing.Font("Harper Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(93, 56);
+            this.label1.Location = new System.Drawing.Point(93, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(376, 30);
             this.label1.TabIndex = 0;
@@ -158,41 +172,177 @@
             // 
             // buttonCrear
             // 
-            this.buttonCrear.Location = new System.Drawing.Point(291, 537);
+            this.buttonCrear.Location = new System.Drawing.Point(84, 532);
             this.buttonCrear.Name = "buttonCrear";
-            this.buttonCrear.Size = new System.Drawing.Size(116, 45);
+            this.buttonCrear.Size = new System.Drawing.Size(152, 49);
             this.buttonCrear.TabIndex = 13;
-            this.buttonCrear.Text = "Crear";
+            this.buttonCrear.Text = "Crear Registro";
             this.buttonCrear.UseVisualStyleBackColor = true;
             this.buttonCrear.Click += new System.EventHandler(this.buttonCrear_Click);
             // 
-            // dataGridView1
+            // dataGridViewConsolas
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(653, 159);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(756, 232);
-            this.dataGridView1.TabIndex = 14;
+            this.dataGridViewConsolas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewConsolas.Location = new System.Drawing.Point(791, 176);
+            this.dataGridViewConsolas.Name = "dataGridViewConsolas";
+            this.dataGridViewConsolas.RowHeadersWidth = 62;
+            this.dataGridViewConsolas.RowTemplate.Height = 28;
+            this.dataGridViewConsolas.Size = new System.Drawing.Size(756, 296);
+            this.dataGridViewConsolas.TabIndex = 14;
             // 
             // buttonCargarRegistros
             // 
-            this.buttonCargarRegistros.Location = new System.Drawing.Point(662, 436);
+            this.buttonCargarRegistros.Location = new System.Drawing.Point(791, 525);
             this.buttonCargarRegistros.Name = "buttonCargarRegistros";
-            this.buttonCargarRegistros.Size = new System.Drawing.Size(155, 35);
+            this.buttonCargarRegistros.Size = new System.Drawing.Size(187, 61);
             this.buttonCargarRegistros.TabIndex = 15;
-            this.buttonCargarRegistros.Text = "Cargar datos";
+            this.buttonCargarRegistros.Text = "Cargar todos los registros";
             this.buttonCargarRegistros.UseVisualStyleBackColor = true;
             this.buttonCargarRegistros.Click += new System.EventHandler(this.buttonCargarRegistros_Click);
+            // 
+            // buttonBuscarPorID
+            // 
+            this.buttonBuscarPorID.Location = new System.Drawing.Point(597, 173);
+            this.buttonBuscarPorID.Name = "buttonBuscarPorID";
+            this.buttonBuscarPorID.Size = new System.Drawing.Size(128, 33);
+            this.buttonBuscarPorID.TabIndex = 16;
+            this.buttonBuscarPorID.Text = "Buscar por Id";
+            this.buttonBuscarPorID.UseVisualStyleBackColor = true;
+            this.buttonBuscarPorID.Click += new System.EventHandler(this.buttonBuscarPorID_Click);
+            // 
+            // buttonActualizar
+            // 
+            this.buttonActualizar.Location = new System.Drawing.Point(260, 532);
+            this.buttonActualizar.Name = "buttonActualizar";
+            this.buttonActualizar.Size = new System.Drawing.Size(152, 49);
+            this.buttonActualizar.TabIndex = 17;
+            this.buttonActualizar.Text = "Actualizar registro";
+            this.buttonActualizar.UseVisualStyleBackColor = true;
+            this.buttonActualizar.Click += new System.EventHandler(this.buttonActualizar_Click);
+            // 
+            // buttonEliminar
+            // 
+            this.buttonEliminar.Location = new System.Drawing.Point(432, 532);
+            this.buttonEliminar.Name = "buttonEliminar";
+            this.buttonEliminar.Size = new System.Drawing.Size(152, 49);
+            this.buttonEliminar.TabIndex = 18;
+            this.buttonEliminar.Text = "Eliminar registro";
+            this.buttonEliminar.UseVisualStyleBackColor = true;
+            this.buttonEliminar.Click += new System.EventHandler(this.buttonEliminar_Click);
+            // 
+            // buttonSiguiente
+            // 
+            this.buttonSiguiente.Location = new System.Drawing.Point(260, 34);
+            this.buttonSiguiente.Name = "buttonSiguiente";
+            this.buttonSiguiente.Size = new System.Drawing.Size(110, 33);
+            this.buttonSiguiente.TabIndex = 20;
+            this.buttonSiguiente.Text = "Siguiente";
+            this.buttonSiguiente.UseVisualStyleBackColor = true;
+            this.buttonSiguiente.Click += new System.EventHandler(this.buttonSiguiente_Click);
+            // 
+            // buttonAnterior
+            // 
+            this.buttonAnterior.Location = new System.Drawing.Point(116, 34);
+            this.buttonAnterior.Name = "buttonAnterior";
+            this.buttonAnterior.Size = new System.Drawing.Size(110, 33);
+            this.buttonAnterior.TabIndex = 21;
+            this.buttonAnterior.Text = "Anterior";
+            this.buttonAnterior.UseVisualStyleBackColor = true;
+            this.buttonAnterior.Click += new System.EventHandler(this.buttonAnterior_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button3);
+            this.groupBox1.Controls.Add(this.buttonFiltrar_porSega);
+            this.groupBox1.Controls.Add(this.buttonFiltrar_porNintendo);
+            this.groupBox1.Location = new System.Drawing.Point(1316, 512);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(231, 193);
+            this.groupBox1.TabIndex = 22;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Consultas por filtro";
+            // 
+            // buttonFiltrar_porNintendo
+            // 
+            this.buttonFiltrar_porNintendo.Location = new System.Drawing.Point(31, 32);
+            this.buttonFiltrar_porNintendo.Name = "buttonFiltrar_porNintendo";
+            this.buttonFiltrar_porNintendo.Size = new System.Drawing.Size(171, 42);
+            this.buttonFiltrar_porNintendo.TabIndex = 0;
+            this.buttonFiltrar_porNintendo.Text = "Filtrar por Nintendo";
+            this.buttonFiltrar_porNintendo.UseVisualStyleBackColor = true;
+            this.buttonFiltrar_porNintendo.Click += new System.EventHandler(this.buttonFiltrar_porNintendo_Click);
+            // 
+            // buttonFiltrar_porSega
+            // 
+            this.buttonFiltrar_porSega.Location = new System.Drawing.Point(31, 85);
+            this.buttonFiltrar_porSega.Name = "buttonFiltrar_porSega";
+            this.buttonFiltrar_porSega.Size = new System.Drawing.Size(171, 42);
+            this.buttonFiltrar_porSega.TabIndex = 1;
+            this.buttonFiltrar_porSega.Text = "Filtrar por Sega";
+            this.buttonFiltrar_porSega.UseVisualStyleBackColor = true;
+            this.buttonFiltrar_porSega.Click += new System.EventHandler(this.buttonFiltrar_porSega_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(31, 139);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(171, 42);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Filtrar por Sony";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.label8.Font = new System.Drawing.Font("Harper Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label8.Location = new System.Drawing.Point(1192, 47);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(388, 30);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "DANIELA MARICLER GÜITZ PALMA";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.label9.Font = new System.Drawing.Font("Harper Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label9.Location = new System.Drawing.Point(1342, 102);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(238, 30);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "CARNE 0905-23-15374";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.buttonAnterior);
+            this.groupBox2.Controls.Add(this.buttonSiguiente);
+            this.groupBox2.Location = new System.Drawing.Point(84, 620);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(500, 85);
+            this.groupBox2.TabIndex = 25;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Navegación de los registros";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1468, 658);
+            this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.FloralWhite;
+            this.ClientSize = new System.Drawing.Size(1662, 743);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.buttonEliminar);
+            this.Controls.Add(this.buttonActualizar);
+            this.Controls.Add(this.buttonBuscarPorID);
             this.Controls.Add(this.buttonCargarRegistros);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewConsolas);
             this.Controls.Add(this.buttonCrear);
             this.Controls.Add(this.comboBoxCompania);
             this.Controls.Add(this.textBoxGeneracion);
@@ -207,9 +357,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Base de datos sobre Consolas";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewConsolas)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,8 +383,20 @@
         private System.Windows.Forms.TextBox textBoxGeneracion;
         private System.Windows.Forms.ComboBox comboBoxCompania;
         private System.Windows.Forms.Button buttonCrear;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewConsolas;
         private System.Windows.Forms.Button buttonCargarRegistros;
+        private System.Windows.Forms.Button buttonBuscarPorID;
+        private System.Windows.Forms.Button buttonActualizar;
+        private System.Windows.Forms.Button buttonEliminar;
+        private System.Windows.Forms.Button buttonSiguiente;
+        private System.Windows.Forms.Button buttonAnterior;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonFiltrar_porSega;
+        private System.Windows.Forms.Button buttonFiltrar_porNintendo;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 
